@@ -1,7 +1,8 @@
 
 import './App.css'
-//import { RegisterForm } from './components/forms/RegisterForm'
-import { Nav } from './components/nav/Nav'
+//import { LoginForm } from './components/forms/LoginForm'
+import { RegisterForm } from './components/forms/RegisterForm'
+// import { Nav } from './components/nav/Nav'
 
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
 
   return (
     <>
-      <Nav/>
+      {/* <Nav/> */}
+      {/* <LoginForm/> */}
+      <RegisterForm/>
     </>
   )
 }
