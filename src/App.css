@@ -1,0 +1,22 @@
+:root{
+    --purple: #8565FF;
+    --purpleDark: #9747FF;
+    --blue: #699BF7;
+    --red: #F66565;
+
+    --greyFont: #58595A;
+    --blueFont: #345F86;
+    --blackFont: #000000;
+    --greyExtraLightFont: rgba(0, 0, 0, 0.24);
+    --greyLightFont: rgba(0, 0, 0, 0.4);
+
+    --gradientPinkBlue: linear-gradient(270deg, rgba(215, 231, 255, 0.64) 3.11%, rgba(227, 238, 255, 0.28) 21.61%, rgba(255, 255, 255, 0.00) 26.48%, rgba(252, 252, 252, 0.53) 32.81%, rgba(244, 248, 255, 0.53) 44.02%, rgba(255, 255, 255, 0.49) 52.3%, rgba(244, 233, 255, 0.37) 65.45%, rgba(255, 255, 255, 0.34) 71.29%, rgba(244, 234, 255, 0.26) 96.62%);
+    --backgroundGrey:rgba(244, 244, 244, 0.58);
+    
+    --boxShadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
+    --boxShadowBlur: -4px 4px 8px 0px rgba(95, 92, 92, 0.15);
+
+    --borderRadiusSmall: 18px;
+    --borderRadiusRegular: 25px;
+    --borderRadiusLarge: 50px;
+}
