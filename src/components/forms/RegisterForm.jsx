@@ -1,76 +1,101 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { registerSchema } from "../../utils/validationSchemas";
+import { registerUser } from "../../service/authService";
 export const RegisterForm = () => {
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-
   const navigate = useNavigate();
-  const {login } = useAuth();
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-  const handleChangeLastName = (e) => {
-    setLastName(e.target.value);
-  };
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const { login } = useAuth();
 
-  const responseErrors = (errors) => {
-    setErrors(errors);
+  const initialValues = {
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = { name, lastName, email, password };
+  const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8081/api/auth/register",
-        data
-      );
-      console.log(response.data);
-      login(response.data.token);
+      const response = await registerUser(values);
+      login(response.token);
       navigate("/");
     } catch (error) {
-      // console.error(error.response.data.errors);
-      responseErrors(error.response.data.errors);
-      console.log(errors);
+      console.log(error);
     }
+    setSubmitting(false);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-      <input type="text" name="name" onChange={handleChangeName} value={name} />
-      <input
-        type="text"
-        name="lastname"
-        onChange={handleChangeLastName}
-        value={lastName}
-      />
-      </div>
-      <input
-        type="email"
-        name="email"
-        onChange={handleChangeEmail}
-        value={email}
-      />
-      <input
-        type="password"
-        name="password"
-        onChange={handleChangePassword}
-        value={password}
-      />
-      <Link to="/login">Ya soy parte de Mowton</Link>
-      <button type="submit">Registrarse</button>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={registerSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form className="formContainer">
+          <div className="namesContainer">
+            <div className="inputGroup">
+              <label htmlFor="name" className="labelInput">
+                Nombre
+              </label>
+              <Field type="text" name="name" className="txtInput" />
+              <div className="errorMessage">
+                <ErrorMessage name="name" component="span" />
+              </div>
+            </div>
 
-      {errors && errors.map((err, index) => <li key={index}>{err.path} : {err.msg}</li>)}
-    </form>
+            <div className="inputGroup">
+              <label htmlFor="lastName" className="labelInput">
+                Apellido
+              </label>
+              <Field type="text" name="lastName" className="txtInput" />
+              <div className="errorMessage">
+                <ErrorMessage name="lastName" component="span" />
+              </div>
+            </div>
+          </div>
+
+          <div className="inputGroup">
+            <label htmlFor="email" className="labelInput">
+              Correo Electrónico
+            </label>
+            <Field type="email" name="email" className="txtInput" />
+            <div className="errorMessage">
+              <ErrorMessage name="email" component="span" />
+            </div>
+          </div>
+
+          <div className="inputGroup">
+            <label htmlFor="password" className="labelInput">
+              Contraseña
+            </label>
+            <Field type="password" name="password" className="txtInput" />
+            <div className="errorMessage">
+              <ErrorMessage name="password" component="span" />
+            </div>
+          </div>
+
+          <div className="inputGroup">
+            <label htmlFor="confirmPassword" className="labelInput">
+              Confirmar Contraseña
+            </label>
+            <Field
+              type="password"
+              name="confirmPassword"
+              className="txtInput"
+            />
+            <div className="errorMessage">
+              <ErrorMessage name="confirmPassword" component="span" />
+            </div>
+          </div>
+
+          <Link to="/login" className="linkForm">
+            Ya soy parte de Mowton
+          </Link>
+          <button type="submit" disabled={isSubmitting} className="btnSubmit">
+            Registrarse
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };
