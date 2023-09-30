@@ -1,8 +1,8 @@
 
-import { PostFiler } from '../components/PostFiler'
+import { Nav } from '../components/nav/Nav'
 
 export const HomePage = () => {
   return (
-    <PostFiler/>
+    <Nav/>
   )
 }
