@@ -1,0 +1,24 @@
+.authContainer{
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/fondoAuthPageHorizontal.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.welcomeTxt{
+    font-size: 2.5rem;
+    color: var(--blueFont);
+    text-align: center;
+}
+
+.sloganTxt{
+    font-size: 1rem;
+    color: var(--greyFont);
+    text-align: center;
+}

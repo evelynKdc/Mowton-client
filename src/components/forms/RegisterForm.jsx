@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { registerSchema } from "../../utils/validationSchemas";
 import { registerUser } from "../../service/authService";
+import "./form.css"
 export const RegisterForm = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -32,22 +33,22 @@ export const RegisterForm = () => {
     >
       {({ isSubmitting }) => (
         <Form className="formContainer">
-          <div className="namesContainer">
-            <div className="inputGroup">
+          <div className="dualContainer">
+            <div className="inputGroup inputGroup--dual">
               <label htmlFor="name" className="labelInput">
                 Nombre
               </label>
-              <Field type="text" name="name" className="txtInput" />
+              <Field type="text" name="name" className="txtInput txtInput--dual" />
               <div className="errorMessage">
                 <ErrorMessage name="name" component="span" />
               </div>
             </div>
 
-            <div className="inputGroup">
+            <div className="inputGroup inputGroup--dual">
               <label htmlFor="lastName" className="labelInput">
                 Apellido
               </label>
-              <Field type="text" name="lastName" className="txtInput" />
+              <Field type="text" name="lastName" className="txtInput txtInput--dual" />
               <div className="errorMessage">
                 <ErrorMessage name="lastName" component="span" />
               </div>
@@ -63,36 +64,40 @@ export const RegisterForm = () => {
               <ErrorMessage name="email" component="span" />
             </div>
           </div>
-
-          <div className="inputGroup">
+          <div className="dualContainer">
+          <div className="inputGroup inputGroup--dual">
             <label htmlFor="password" className="labelInput">
               Contraseña
             </label>
-            <Field type="password" name="password" className="txtInput" />
+            <Field type="password" name="password" className="txtInput txtInput--dual" />
             <div className="errorMessage">
               <ErrorMessage name="password" component="span" />
             </div>
           </div>
 
-          <div className="inputGroup">
+          <div className="inputGroup inputGroup--dual">
             <label htmlFor="confirmPassword" className="labelInput">
               Confirmar Contraseña
             </label>
             <Field
               type="password"
               name="confirmPassword"
-              className="txtInput"
+              className="txtInput txtInput--dual"
             />
             <div className="errorMessage">
               <ErrorMessage name="confirmPassword" component="span" />
             </div>
           </div>
-
+          </div>
           <Link to="/login" className="linkForm">
             Ya soy parte de Mowton
           </Link>
           <button type="submit" disabled={isSubmitting} className="btnSubmit">
             Registrarse
+          </button>
+          <span className="separatorO">o</span>
+          <button type="submit" disabled={isSubmitting} className="btnSubmit">
+            google
           </button>
         </Form>
       )}

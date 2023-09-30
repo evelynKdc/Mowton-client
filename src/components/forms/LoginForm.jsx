@@ -32,7 +32,7 @@ export const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form className="formContainer">
+        <Form className="formContainer formContainer--login">
           <div className="inputGroup">
             <label htmlFor="email" className="labelInput">
               Correo Electrónico
